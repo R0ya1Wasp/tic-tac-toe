@@ -1,0 +1,20 @@
+.square-button {
+  width: 30px;
+  height: 30px;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border: 1px solid #999;
+  cursor: pointer;
+  padding: 0;
+}
+
+.square-button.X {
+  color: red;
+}
+
+.square-button.O {
+  color: green;
+}
