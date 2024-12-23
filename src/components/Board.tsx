@@ -5,21 +5,20 @@ import './Board.css';
 interface BoardProps {
   size: number;
   onWin: (winner: string) => void;
+  currentPlayer: string;
+  onPlayerSwitch: () => void;
 }
 
-const Board: React.FC<BoardProps> = ({ size, onWin }) => {
+const Board: React.FC<BoardProps> = ({ size, onWin, currentPlayer, onPlayerSwitch }) => {
   const [squares, setSquares] = useState(Array(size * size).fill(null));
-  const [xIsNext, setXIsNext] = useState(true);
   const [winner, setWinner] = useState<string | null>(null);
 
   useEffect(() => {
     if (winner) {
       setSquares(Array(size * size).fill(null));
-      setXIsNext(true);
       setWinner(null);
     }
   }, [winner, size]);
-
 
   const handleClick = (x: number, y: number) => {
     const index = y * size + x;
@@ -27,14 +26,15 @@ const Board: React.FC<BoardProps> = ({ size, onWin }) => {
       return;
     }
     const newSquares = squares.slice();
-    newSquares[index] = xIsNext ? 'X' : 'O';
+    newSquares[index] = currentPlayer;
     setSquares(newSquares);
-    setXIsNext(!xIsNext);
 
     const calculatedWinner = calculateWinner(newSquares, size);
     if (calculatedWinner) {
       setWinner(calculatedWinner);
       onWin(calculatedWinner);
+    } else {
+      onPlayerSwitch(); 
     }
   };
 
