@@ -17,9 +17,9 @@ const App: React.FC = () => {
 
   return (
     <div className="app-container">
-      <h1>Крестики vs Нолики</h1>
+      <h1>Бесконечные Крестики vs Нолики</h1>
       <Board size={size} onWin={handleWin} />
-      <Modal show={winner !== null} message={`${winner} победили!`} onClose={closeModal} />
+      <Modal show={winner !== null} message={`${winner} победил!`} onClose={closeModal} />
     </div>
   );
 };
